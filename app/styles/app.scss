@@ -1,0 +1,80 @@
+@import 'normalize';
+
+$grey: #3e3e3e;
+$blue: #28b0d4;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 2em 0 0;
+}
+
+.page {
+  &-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: $grey;
+  }
+
+  &-heading {
+    margin: 0;
+    padding: 0.5em 0;
+    font-size: 1em;
+    font-weight: normal;
+    color: #fff;
+    text-transform: uppercase;
+  }
+}
+
+.content-wrapper {
+  margin: 0 auto;
+  width: 42rem;
+  max-width: 98%;
+  font-size: 2em;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0 1.5em;
+  line-height: 2.5;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+  border: none;
+  border-radius: 0.25em;
+  cursor: pointer;
+
+  &:hover {
+    color: #fff;
+  }
+
+  &-primary {
+    background: $blue;
+
+    &:hover {
+      background: lighten($blue, 5%);
+    }
+  }
+}
+
+.match-up {
+  overflow: hidden;
+}
+
+.team {
+  float: left;
+  width: 50%;
+  border-right: 1px solid $grey;
+
+  + .team {
+    border-left: 1px solid $grey;
+    border-right: none;
+  }
+}
