@@ -1,0 +1,52 @@
+.page {
+  &-header {
+    @include greyBox;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &-heading {
+    margin: 0;
+    font-size: 80%;
+    font-weight: normal;
+  }
+}
+
+.content-wrapper {
+  padding: 2em 0 0;
+  margin: 0 auto;
+  width: 42rem;
+  max-width: 98%;
+  text-align: center;
+
+  p, .btn {
+    font-size: 2em;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 0 1.5em;
+  line-height: 2.5;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+  border: none;
+  border-radius: 0.25em;
+  cursor: pointer;
+
+  &:hover {
+    color: #fff;
+  }
+
+  &-primary {
+    background: $blue;
+
+    &:hover {
+      background: lighten($blue, 5%);
+    }
+  }
+}

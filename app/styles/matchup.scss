@@ -1,0 +1,38 @@
+.team {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-grow: 1;
+  cursor: pointer;
+  border: 1px solid $grey;
+
+  &:hover {
+    border-color: #fff;
+  }
+
+  &-color {
+    flex-grow: 1;
+  }
+}
+
+.versus {
+  @include greyBox;
+  letter-spacing: 0.5em;
+  flex-basis: auto;
+}
+
+.match-up {
+  padding: 1.95em 0 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.progress {
+  @include greyBox;
+  flex-basis: auto;
+  font-size: 80%;
+}

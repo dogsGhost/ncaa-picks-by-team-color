@@ -1,11 +1,5 @@
-@import 'normalize';
-
 $grey: #3e3e3e;
 $blue: #28b0d4;
-
-* {
-  box-sizing: border-box;
-}
 
 @mixin greyBox () {
   padding: 0.5rem;
@@ -16,94 +10,11 @@ letter-spacing: 0.2em;
   background: $grey;
 }
 
-.page {
-  &-header {
-    @include greyBox;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  &-heading {
-    margin: 0;
-    font-size: 80%;
-    font-weight: normal;
-  }
+* {
+  box-sizing: border-box;
 }
 
-.content-wrapper {
-  padding: 2em 0 0;
-  margin: 0 auto;
-  width: 42rem;
-  max-width: 98%;
-  text-align: center;
-
-  p, .btn {
-    font-size: 2em;
-  }
-}
-
-.btn {
-  display: inline-block;
-  padding: 0 1.5em;
-  line-height: 2.5;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #fff;
-  border: none;
-  border-radius: 0.25em;
-  cursor: pointer;
-
-  &:hover {
-    color: #fff;
-  }
-
-  &-primary {
-    background: $blue;
-
-    &:hover {
-      background: lighten($blue, 5%);
-    }
-  }
-}
-
-.team {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  flex-grow: 1;
-  cursor: pointer;
-  border: 1px solid $grey;
-
-  &:hover {
-    border-color: #fff;
-  }
-
-  &-color {
-    flex-grow: 1;
-  }
-}
-
-.versus {
-  @include greyBox;
-  letter-spacing: 0.5em;
-  flex-basis: auto;
-}
-
-.match-up {
-  padding: 1.95em 0 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  align-content: stretch;
-}
-
-.progress {
-  @include greyBox;
-  flex-basis: auto;
-  font-size: 80%;
-}
+@import 'normalize';
+@import 'base';
+@import 'matchup';
+@import 'bracket';
