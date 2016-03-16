@@ -45,7 +45,7 @@ export default class PickView extends Component {
     // check if this is the last pick of a round
     if (pickNum >= pickNumThresholds[roundNum - 1]) {
       // increment round
-      roundNum = roundNum + 1;
+      roundNum = roundNum < 6 ? roundNum + 1: roundNum;
       // reset pick
       pickNum = 1;
     } else {
@@ -81,8 +81,6 @@ export default class PickView extends Component {
       srcArray[curIndex + 1]
     ];
 
-console.log(curIndex);
-console.log(curMatchUp);
     // get teams based on values from `curMatchUp`
     let curTeams = curMatchUp.map((teamId) => {
       return allTeams.find((item) => item.id === teamId);
