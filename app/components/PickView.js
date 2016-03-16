@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import allTeams from 'json!ncaa-team-colors';
+import matchUps from 'json!../json/ncaa-matchups-by-id.json';
 import FinalBracket from './FinalBracket';
 
-// this is a mock array
-// TODO: create real one based off match ups in `/_ref/match-ups/html`
-// and id values from `allTeams`
-const matchUps = [
-  [allTeams[0].id, allTeams[1].id],
-  [allTeams[2].id, allTeams[3].id]
-];
+// since we know how many picks a user will make each round
+// we can track what `pickNum` will be when a round ends
+const pickCountThresholds = [32, 48, 56, 60, 62, 63];
 
 export default class PickView extends Component {
   constructor() {
@@ -16,8 +13,6 @@ export default class PickView extends Component {
     this.state = {
       // current pick user is making
       pickNum: 1,
-      // number of picks the user will make in each 'round'
-      pickCount: [32, 16, 8, 4, 2],
       // correspond to the different rounds of the play offs
       round1: [], // round of 64
       round2: [], // round of 32
@@ -25,22 +20,58 @@ export default class PickView extends Component {
       round4: [], // top 8
       round5: [], // final 4
       // this is the winner, when this is set, show the team names
-      winner: ''
+      round6: []
     };
   }
 
+  // used to determine what array we store the winner in
+  // returns a number corresponding to what round
+  _getRound() {
+    let i = pickCountThresholds.length;
+    let index = 0;
+
+    while (i > 0) {
+      if (this.state.pickNum <= pickCountThresholds[i - 1]) {
+        index = i;
+      }
+      i--;
+    }
+console.log(this.state.pickNum, index);
+    return index;
+  }
+
   _handlePick(e) {
-    // TODO: get data-id and add it to correct round array on state
-    console.log(e.target)
-    // TODO: increment `this.state.pickNum`
+    // get which property of `this.state` we are going to use
+    let prop = `round${this._getRound()}`;
+
+    let id = '';
+    // check if the clicked element has the attr we need
+    if (e.target.dataset.teamId) {
+      id = e.target.dataset.teamId;
+    } else {
+      // if its not move up the tree to parent
+      id = e.target.parentNode.dataset.teamId;
+    }
+
     this.setState({
-      // pickNum: this.state.pickNum++
+      // move on to next pick
+      pickNum: ++this.state.pickNum,
+      // add `id` value to appropriate array
+      [prop]: [...this.state[prop], [id]]
     });
   }
 
   render() {
-    // get the match up we want to show
-    let curMatchUp = matchUps[this.state.pickNum - 1];
+    // get the index of the first team in the current Match up
+    // minus 1 accounts for pickNum starting at 1 and array index starting at 0
+    // multiple by 2 because we're moving through the matchUp array in pairs
+    let curIndex = (this.state.pickNum - 1) * 2;
+    let curMatchUp = [
+      // first team
+      matchUps[curIndex],
+      // second team
+      matchUps[curIndex + 1]
+    ];
 
     // get teams based on values from `curMatchUp`
     let curTeams = curMatchUp.map((teamId) => {
@@ -52,21 +83,18 @@ export default class PickView extends Component {
       // create a child node for each team color
       let teamColors = team.colors.map((color, index, arr) => {
         let styles = {
-          background: color,
-          // there can be 2 or 3 colors, this ensures the total height is 100%
-          height: `${Math.round(100 / arr.length)}vh`
+          background: color
         };
         return (
           <div className="team-color" key={index} style={styles}>
           </div>
         );
-        // we reverse the nodes so white is last rather than first
-      }).reverse();
+      });
 
       return (
         <div
           className="team"
-          dataId={team.id}
+          data-team-id={team.id}
           key={team.id}
           onClick={this._handlePick.bind(this)}
         >
@@ -81,7 +109,15 @@ export default class PickView extends Component {
           this.state.winner ?
             <FinalBracket /> :
             <div className="match-up">
-              {matchUpNodes}
+              {matchUpNodes[0]}
+
+              <div className="versus">
+                versus
+              </div>
+
+              {matchUpNodes[1]}
+
+              <div className="progress">Pick {this.state.pickNum} of 63</div>
             </div>
         }
       </div>

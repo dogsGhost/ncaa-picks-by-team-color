@@ -7,36 +7,41 @@ $blue: #28b0d4;
   box-sizing: border-box;
 }
 
-body {
-  padding: 2em 0 0;
+@mixin greyBox () {
+  padding: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+letter-spacing: 0.2em;
+  background: $grey;
 }
 
 .page {
   &-header {
+    @include greyBox;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    text-align: center;
-    background: $grey;
   }
 
   &-heading {
     margin: 0;
-    padding: 0.5em 0;
-    font-size: 1em;
+    font-size: 80%;
     font-weight: normal;
-    color: #fff;
-    text-transform: uppercase;
   }
 }
 
 .content-wrapper {
+  padding: 2em 0 0;
   margin: 0 auto;
   width: 42rem;
   max-width: 98%;
-  font-size: 2em;
   text-align: center;
+
+  p, .btn {
+    font-size: 2em;
+  }
 }
 
 .btn {
@@ -64,17 +69,41 @@ body {
   }
 }
 
-.match-up {
-  overflow: hidden;
+.team {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-grow: 1;
+  cursor: pointer;
+  border: 1px solid $grey;
+
+  &:hover {
+    border-color: #fff;
+  }
+
+  &-color {
+    flex-grow: 1;
+  }
 }
 
-.team {
-  float: left;
-  width: 50%;
-  border-right: 1px solid $grey;
+.versus {
+  @include greyBox;
+  letter-spacing: 0.5em;
+  flex-basis: auto;
+}
 
-  + .team {
-    border-left: 1px solid $grey;
-    border-right: none;
-  }
+.match-up {
+  padding: 1.95em 0 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.progress {
+  @include greyBox;
+  flex-basis: auto;
+  font-size: 80%;
 }
