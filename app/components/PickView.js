@@ -32,15 +32,7 @@ export default class PickView extends Component {
     let pickNum = this.state.pickNum;
     // get which property of `this.state` we are adding to
     let prop = `round${roundNum}`;
-
-    let id = '';
-    // check if the clicked element has the attr we need
-    if (e.target.dataset.teamId) {
-      id = e.target.dataset.teamId;
-    } else {
-      // if its not move up the tree to parent
-      id = e.target.parentNode.dataset.teamId;
-    }
+    let id = this._getTeamId(e.target);
 
     // check if this is the last pick of a round
     if (pickNum >= pickNumThresholds[roundNum - 1]) {
@@ -65,7 +57,20 @@ export default class PickView extends Component {
     });
   }
 
-  render() {
+  // get the iteam id from the data attr of the clicked element
+  _getTeamId(ele) {
+    // check if the clicked element has the attr we need
+    if (ele.dataset.teamId) {
+      return ele.dataset.teamId;
+    } else {
+      // if its not move up the tree to parent
+      return ele.parentNode.dataset.teamId;
+    }
+    throw '_getTeamId recieved unexpected parameter';
+  }
+
+  // returns an array two objects for the two teams we want to match up
+  _getCurrentTeams() {
     // based on the round, figure out which array we need to pull match ups from
     let roundNum = this.state.roundNum;
     let srcArray = roundNum === 1 ? matchUps : this.state[`round${roundNum - 1}`];
@@ -81,20 +86,21 @@ export default class PickView extends Component {
       srcArray[curIndex + 1]
     ];
 
-    // get teams based on values from `curMatchUp`
-    let curTeams = curMatchUp.map((teamId) => {
+    // get the full team objects based on values from `curMatchUp`
+    return curMatchUp.map((teamId) => {
       return allTeams.find((item) => item.id === teamId);
     });
+  }
 
+  render() {
+    let curTeams = this._getCurrentTeams();
     // genereate html for current teams
     let matchUpNodes = curTeams.map((team) => {
       // create a child node for each team color
-      let teamColors = team.colors.map((color, index, arr) => {
-        let styles = {
-          background: color
-        };
+      let teamColors = team.colors.map((color, index) => {
         return (
-          <div className="team-color" key={index} style={styles}>
+          <div className="team-color" key={index} style={{ background: color }}>
+            &nbsp;
           </div>
         );
       });
@@ -117,17 +123,13 @@ export default class PickView extends Component {
           this.state.round6.length ?
             <FinalBracket
               {...this.state}
+              round0={matchUps}
               allTeams={allTeams}
             /> :
             <div className="match-up">
               {matchUpNodes[0]}
-
-              <div className="versus">
-                versus
-              </div>
-
+              <div className="versus">versus</div>
               {matchUpNodes[1]}
-
               <div className="progress">Pick {this.state.pickCount} of 63</div>
             </div>
         }
