@@ -1,0 +1,24 @@
+.col-wrapper {
+  padding: 1.8em 0 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.col {
+  // flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.team-node {
+  // flex: auto;
+  padding: 0.5em;
+  // background: lighten($grey, 70%);
+  border: 1px solid $grey;
+
+  &:nth-child(even) {
+    // margin-bottom: .5em;
+  }
+}
