@@ -2,4 +2,9 @@
 
 # Build settings
 markdown: kramdown
-source: dist
+exclude:
+  - app
+  - node_modules
+  - package.json
+  - README.md
+  - webpack.config.js
