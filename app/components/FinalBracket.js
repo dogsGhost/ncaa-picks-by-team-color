@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './Header';
 
 // pass in an array of ids and the array to search,
 // return an array of corresponding names
@@ -106,9 +107,7 @@ const FinalBracket = (props) => {
 
   return (
     <div>
-    <header className="page-header">
-      <h1 className="page-heading">NCAA March Madness &mdash; by the Colors</h1>
-    </header>
+    <Header />
       <div className="col-wrapper flex-container">
         {roundNodesList[0][0]}
           {roundNodesList[1][0]}

@@ -1,10 +1,9 @@
 import React from 'react';
+import Header from './Header';
 
 const IntroView = (props) => (
   <div>
-    <header className="page-header">
-      <h1 className="page-heading">NCAA March Madness &mdash; by the Colors</h1>
-    </header>
+    <Header />
     <div className="content-wrapper">
       <p>Pick your bracket based on team colors.</p>
       <button
