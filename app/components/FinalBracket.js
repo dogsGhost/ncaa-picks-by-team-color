@@ -2,8 +2,8 @@ import React from 'react';
 import Header from './Header';
 
 // pass in an array of ids and the array to search,
-// return an array of corresponding names
-const getNames = (idArray, srcArray) => {
+// return an array of corresponding team objects
+const getTeams = (idArray, srcArray) => {
   return idArray.map((idString) => {
     return srcArray.find((item) => item.id === idString);
   });
@@ -78,11 +78,10 @@ const FinalBracket = (props) => {
       '2': 'championship',
       '1': 'champion'
     };
-    let roundLen = round.length;
     let roundClass = roundKey[`${Math.ceil(round.length)}`] || '';
-    // take a round and get the names
+    // take a round and get the teams
     // split it into 2 array, first half and second half
-    let r = splitArray(getNames(round, teams));
+    let r = splitArray(getTeams(round, teams));
     // send that array to a function that will take each child array
     let roundNodesChild = r.map((childArray, index) => {
       // generate a node for them
@@ -103,7 +102,6 @@ const FinalBracket = (props) => {
     // add node to parent array
     roundNodesList.push(roundNodesChild);
   });
-  // 1st round, 2nd round, sweet 16, elite 8, final four, championship
 
   return (
     <div>
@@ -128,22 +126,3 @@ const FinalBracket = (props) => {
 };
 
 export default FinalBracket;
-
-/*
-unsed code might want later:
-<div className="flex-container round-names">
-  <div className="flex-child">1st Round</div>
-  <div className="flex-child">2nd Round</div>
-  <div className="flex-child">Sweet Sixteen</div>
-  <div className="flex-child">Elite Eight</div>
-  <div className="flex-child">Final Four</div>
-  <div className="flex-child">Championship</div>
-  <div className="flex-child">CHAMPION</div>
-  <div className="flex-child">Championship</div>
-  <div className="flex-child">Final Four</div>
-  <div className="flex-child">Elite Eight</div>
-  <div className="flex-child">Sweet Sixteen</div>
-  <div className="flex-child">2nd Round</div>
-  <div className="flex-child">1st Round</div>
-</div>
-*/

@@ -9,24 +9,15 @@ $borderColor: darken($lightBlue, 5%);
   flex: 1;
 }
 
-// .round-names {
-//   @include greyBox;
-//   padding-top: 4em;
-//   font-size: 10px;
-//   display: none;
-// }
-
 .col-wrapper {
   padding-top: 2em;
   margin: 0 auto;
-  // width: 100%;
-  // max-width: 1500px;
   width: 1500px;
 }
 
 .col {
   position: relative;
-  padding-top: 2em;
+  padding-top: 2.25em;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -47,10 +38,9 @@ $borderColor: darken($lightBlue, 5%);
 
   &:before {
     position: absolute;
-    top: 0;
+    top: 0.25em;
     left: 0;
     right: 0;
-    padding: 0.5em 0 0;
   }
 }
 
