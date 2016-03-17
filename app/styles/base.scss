@@ -5,6 +5,7 @@
     top: 0;
     left: 0;
     right: 0;
+    z-index: 100;
   }
 
   &-heading {
@@ -22,7 +23,7 @@
   text-align: center;
 
   p, .btn {
-    font-size: 2em;
+    font-size: 1.8em;
   }
 }
 

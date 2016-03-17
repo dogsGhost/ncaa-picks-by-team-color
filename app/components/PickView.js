@@ -127,10 +127,13 @@ export default class PickView extends Component {
               allTeams={allTeams}
             /> :
             <div className="match-up">
+              <div className="progress">
+                Round {this.state.roundNum} of 6 &mdash;
+                 Pick {this.state.pickNum} of {pickNumThresholds[this.state.roundNum - 1]}
+              </div>
               {matchUpNodes[0]}
               <div className="versus">versus</div>
               {matchUpNodes[1]}
-              <div className="progress">Pick {this.state.pickCount} of 63</div>
             </div>
         }
       </div>

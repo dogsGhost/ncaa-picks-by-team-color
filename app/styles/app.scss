@@ -2,12 +2,12 @@ $grey: #3e3e3e;
 $blue: #28b0d4;
 
 @mixin greyBox () {
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   text-align: center;
   text-transform: uppercase;
   color: #fff;
-letter-spacing: 0.2em;
-  background: $grey;
+  letter-spacing: 0.2em;
+  background-color: $grey;
 }
 
 * {

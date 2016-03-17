@@ -17,12 +17,12 @@
 
 .versus {
   @include greyBox;
+  min-height: 2em;
   letter-spacing: 0.5em;
   flex-basis: auto;
 }
 
 .match-up {
-  padding: 1.95em 0 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
