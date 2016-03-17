@@ -1,10 +1,10 @@
 {
   "name": "ncaa-picks-by-team-color",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Make NCAA March Madness picks based on team colors.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --port 4400 --inline --hot",
     "build": "webpack -p"
   },
   "repository": {

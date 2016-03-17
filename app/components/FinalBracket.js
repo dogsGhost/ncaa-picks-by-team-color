@@ -1,10 +1,11 @@
 import React from 'react';
+import Header from './Header';
 
 // pass in an array of ids and the array to search,
-// return an array of corresponding names
-const getNames = (idArray, srcArray) => {
+// return an array of corresponding team objects
+const getTeams = (idArray, srcArray) => {
   return idArray.map((idString) => {
-    return srcArray.find((item) => item.id === idString).name;
+    return srcArray.find((item) => item.id === idString);
   });
 };
 
@@ -26,12 +27,26 @@ const splitArray = (array) => {
   return split;
 };
 
-const createTeamNameNode = (name, index) => {
+// take an array of hex values and return a string to use for css gradient
+const getGradient = (colorArray) => {
+  return colorArray.map((color, index) => {
+    return (
+      <div className="team-border-color" key={index} style={{ background: color }}>
+      </div>
+    );
+  });
+};
+
+// create the element that shows the team name in the final bracket
+const createTeamNameNode = (team, index) => {
+  let name = team.name;
   let classes = `team-node team-${index}`;
+  let colorChildren = getGradient(team.colors);
   // remove the last word from the team name as to shorten it
   name = name.split(' ').slice(0, -1).join(' ').replace('-', ' ');
   return (
     <div key={index} className={classes}>
+      <div className="team-border">{colorChildren}</div>
       {name}
     </div>
   );
@@ -63,11 +78,10 @@ const FinalBracket = (props) => {
       '2': 'championship',
       '1': 'champion'
     };
-    let roundLen = round.length;
     let roundClass = roundKey[`${Math.ceil(round.length)}`] || '';
-    // take a round and get the names
+    // take a round and get the teams
     // split it into 2 array, first half and second half
-    let r = splitArray(getNames(round, teams));
+    let r = splitArray(getTeams(round, teams));
     // send that array to a function that will take each child array
     let roundNodesChild = r.map((childArray, index) => {
       // generate a node for them
@@ -88,13 +102,10 @@ const FinalBracket = (props) => {
     // add node to parent array
     roundNodesList.push(roundNodesChild);
   });
-  // 1st round, 2nd round, sweet 16, elite 8, final four, championship
 
   return (
     <div>
-    <header className="page-header">
-      <h1 className="page-heading">NCAA March Madness &mdash; by the Colors</h1>
-    </header>
+    <Header />
       <div className="col-wrapper flex-container">
         {roundNodesList[0][0]}
           {roundNodesList[1][0]}
@@ -115,22 +126,3 @@ const FinalBracket = (props) => {
 };
 
 export default FinalBracket;
-
-/*
-unsed code might want later:
-<div className="flex-container round-names">
-  <div className="flex-child">1st Round</div>
-  <div className="flex-child">2nd Round</div>
-  <div className="flex-child">Sweet Sixteen</div>
-  <div className="flex-child">Elite Eight</div>
-  <div className="flex-child">Final Four</div>
-  <div className="flex-child">Championship</div>
-  <div className="flex-child">CHAMPION</div>
-  <div className="flex-child">Championship</div>
-  <div className="flex-child">Final Four</div>
-  <div className="flex-child">Elite Eight</div>
-  <div className="flex-child">Sweet Sixteen</div>
-  <div className="flex-child">2nd Round</div>
-  <div className="flex-child">1st Round</div>
-</div> 
-*/
