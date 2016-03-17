@@ -4,7 +4,7 @@ import React from 'react';
 // return an array of corresponding names
 const getNames = (idArray, srcArray) => {
   return idArray.map((idString) => {
-    return srcArray.find((item) => item.id === idString).name;
+    return srcArray.find((item) => item.id === idString);
   });
 };
 
@@ -26,12 +26,26 @@ const splitArray = (array) => {
   return split;
 };
 
-const createTeamNameNode = (name, index) => {
+// take an array of hex values and return a string to use for css gradient
+const getGradient = (colorArray) => {
+  return colorArray.map((color, index) => {
+    return (
+      <div className="team-border-color" key={index} style={{ background: color }}>
+      </div>
+    );
+  });
+};
+
+// create the element that shows the team name in the final bracket
+const createTeamNameNode = (team, index) => {
+  let name = team.name;
   let classes = `team-node team-${index}`;
+  let colorChildren = getGradient(team.colors);
   // remove the last word from the team name as to shorten it
   name = name.split(' ').slice(0, -1).join(' ').replace('-', ' ');
   return (
     <div key={index} className={classes}>
+      <div className="team-border">{colorChildren}</div>
       {name}
     </div>
   );
@@ -132,5 +146,5 @@ unsed code might want later:
   <div className="flex-child">Sweet Sixteen</div>
   <div className="flex-child">2nd Round</div>
   <div className="flex-child">1st Round</div>
-</div> 
+</div>
 */
