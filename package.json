@@ -1,6 +1,6 @@
 {
   "name": "ncaa-picks-by-team-color",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Make NCAA March Madness picks based on team colors.",
   "main": "index.js",
   "scripts": {

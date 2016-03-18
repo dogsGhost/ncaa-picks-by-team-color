@@ -1,4 +1,4 @@
-$lightBlue: #ECF0F1;
+$lightBlue: lighten(#ECF0F1, 5%);
 $borderColor: darken($lightBlue, 5%);
 
 .flex-container {
@@ -47,8 +47,8 @@ $borderColor: darken($lightBlue, 5%);
 .team-node {
   position: relative;
   width: 100%;
-  padding: 0.5em 0.25em 0.25em;
-  line-height: 2;
+  padding: 0.8em 0.5em;
+  line-height: 1.2;
   white-space: nowrap;
   background: $lightBlue;
   border-bottom: 1px solid $borderColor;
